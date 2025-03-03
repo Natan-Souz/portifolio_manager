@@ -6,3 +6,9 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+#arquivo teste
+test_portfolio.py
+
+#banco de dados 
+.db
