@@ -11,4 +11,7 @@ venv.bak/
 test_portfolio.py
 
 #banco de dados 
-.db
+portfolio.db
+
+#Cache
+__pycache__/
