@@ -48,3 +48,18 @@ def calcular_dividend_yield(ticker):
     dividend_yield = dados.get("Dividend Yield")
 
     return round (dividend_yield, 4) if dividend_yield else None
+
+def calcular_pl(ticker):
+    """
+    Calcula os Preço / Lucro (PL)
+    Formula: Preço Atual / Lucro por Ação
+    Obtido diretamente do Yahoo Finance
+    """
+    preco_atual = obter_preco_atual(ticker)
+    dados = obter_dados_fundamentais(ticker)
+    lpa = dados.get("LPA (Lucro por Ação)")
+
+    if not lpa or lpa == 0:
+        return None
+    
+    return round(preco_atual/lpa, 2)
