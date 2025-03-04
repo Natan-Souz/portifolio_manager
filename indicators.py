@@ -63,3 +63,17 @@ def calcular_pl(ticker):
         return None
     
     return round(preco_atual/lpa, 2)
+
+def calcular_volatilidade(ticker, periodo="1y"):
+    """
+    Calcula A volatilidade histórica do ativo (Volatilidade Histórica)
+    Formula: Necessário calcular o desvio padrão dos retornos diarios
+    """
+    historico = session.query(HistoricoPrecos).filter_by(ticker=ticker).all()
+    if not historico:
+        return None
+
+    precos = [h.preco_fechamento for h in historico]
+    retornos = np.diff(precos) / precos[:-1]
+    volatilidade = np.std(retornos) * np.sqrt(252)  # Ajuste para escala anual
+    return round(volatilidade, 4)
