@@ -95,3 +95,21 @@ def calcular_sharpe(ticker, taxa_livre_risco=0.03):
 
     sharpe = (retorno_medio - taxa_livre_risco) / volatilidade
     return round(sharpe, 4)
+
+
+def salvar_indicadores_no_banco(ticker):
+    """
+    Calcula e salva os indicadores financeiros no banco de dados 
+    """
+    indicadores = Indicadores(
+        ticker=ticker,
+        roi=calcular_roi(ticker),
+        pvpa=calcular_pvpa(ticker),
+        dividend_yield=calcular_dividend_yield(ticker),
+        pl=calcular_pl(ticker),
+        volatilidade=calcular_volatilidade(ticker),
+        sharpe=calcular_sharpe(ticker)
+    )
+
+    session.add(indicadores)
+    session.commit()
