@@ -77,3 +77,21 @@ def calcular_volatilidade(ticker, periodo="1y"):
     retornos = np.diff(precos) / precos[:-1]
     volatilidade = np.std(retornos) * np.sqrt(252)  # Ajuste para escala anual
     return round(volatilidade, 4)
+
+def calcular_sharpe(ticker, taxa_livre_risco=0.03):
+    """ 
+    Calcula o Indice Sharpe
+    Formula: (Retorno Esperado - Taxa Livre de Risco) / Volatilidade
+    """
+    retorno_medio = session.query(HistoricoPrecos).filter_by(ticker=ticker).all()
+    if not retorno_medio:
+        return None
+
+    retorno_medio = np.mean([h.preco_fechamento for h in retorno_medio])
+    volatilidade = calcular_volatilidade(ticker)
+
+    if not volatilidade or volatilidade == 0:
+        return None
+
+    sharpe = (retorno_medio - taxa_livre_risco) / volatilidade
+    return round(sharpe, 4)
