@@ -23,3 +23,17 @@ def calcular_roi(ticker):
     lucro_total = (preco_atual * len(transacoes)) - total_custo
     roi = (lucro_total/total_custo) * 100
     return round(roi, 2)
+
+def calcular_pvpa(ticker):
+    """ 
+    Calcula o Preço sobre Valor Patrimonial (P/VPA)
+    Formula: Preço Atual / Valor Patrimonial
+    """
+    preco_atual = obter_preco_atual(ticker)
+    dados = obter_dados_fundamentais(ticker)
+    vpa = dados.get("VPA (Valor Patrimonial por Ação)")
+
+    if not vpa or vpa == 0:
+        return None
+    
+    return round(preco_atual/ vpa, 2)
