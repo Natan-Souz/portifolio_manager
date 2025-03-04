@@ -18,6 +18,17 @@ class Transacao(Base):
     data = Column(Date)
     tipo = Column(String) #Compra ou venda
 
+class HistoricoPrecos(Base):
+    __tablename__ = 'historico_precos'
+    id = Column(Integer, primary_key=True)
+    ticker = Column(String, index=True)
+    data = Column(Date)
+    preco_abertura = Column(Float)
+    preco_fechamento = Column(Float)
+    maximo = Column(Float)
+    minimo = Column(Float)
+    volume = Column(Float)
+    
 # Cria as tabelas no banco de dados
 Base.metadata.create_all(engine)
 
