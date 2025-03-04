@@ -29,6 +29,17 @@ class HistoricoPrecos(Base):
     minimo = Column(Float)
     volume = Column(Float)
     
+class Indicadores(Base):
+    __tablename__ = 'indicadores'
+    id = Column(Integer, primary_key=True)
+    ticker = Column(String, index=True)
+    data = Column(Date)
+    lpa = Column(Float)
+    vpa = Column(Float)
+    dividend_yield = Column(Float)
+    pl = Column(Float)
+    forward_dividend_yield = Column(Float)
+
 # Cria as tabelas no banco de dados
 Base.metadata.create_all(engine)
 
