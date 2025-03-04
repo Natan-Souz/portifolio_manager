@@ -34,11 +34,15 @@ class Indicadores(Base):
     id = Column(Integer, primary_key=True)
     ticker = Column(String, index=True)
     data = Column(Date)
+    roi = Column(Float)
+    pvpa = Column(Float)
     lpa = Column(Float)
     vpa = Column(Float)
     dividend_yield = Column(Float)
     pl = Column(Float)
     forward_dividend_yield = Column(Float)
+    volatilidade = Column(Float)
+    sharpe = Column(Float)
 
 # Cria as tabelas no banco de dados
 Base.metadata.create_all(engine)
