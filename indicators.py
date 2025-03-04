@@ -37,3 +37,14 @@ def calcular_pvpa(ticker):
         return None
     
     return round(preco_atual/ vpa, 2)
+
+def calcular_dividend_yield(ticker):
+    """
+    Calcula os ganhos de dividendos
+    Formula: Dividendos Anuais / Preço Atual * 100
+    Obtido diretamente do Yahoo Finance
+    """
+    dados = obter_dados_fundamentais(ticker)
+    dividend_yield = dados.get("Dividend Yield")
+
+    return round (dividend_yield, 4) if dividend_yield else None
